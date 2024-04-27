@@ -278,9 +278,8 @@ Then we proceed by copying the freq structure, in which we flip the power spectr
     freq_continuous.dimord    = 'chan_freq_time'; % it used to be 'rpt_chan_freq'
     freq_continuous.time      = time;             % add the description of the time dimension
 
-Now we can view the final time-frequency over the whole night
+Now we can view the final time-frequency over the whole night figure
 
-    figure
     cfg                = [];
     cfg.baseline       = [min(freq_continuous.time) max(freq_continuous.time)];
     cfg.baselinetype   = 'normchange';
