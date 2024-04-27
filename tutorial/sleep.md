@@ -254,18 +254,20 @@ Electrophysiological recordings can also be used to identify wake periods. In th
     cfg.taper         = 'hanning';
     cfg.foi           = 0.5:0.5:16; % in 0.5 Hz steps
     cfg.keeptrials    = 'yes';
-    freq_epoched = ft_freqanalysis(cfg, data_epoched_clean)
+    freq_epoched = ft_freqanalysis(cfg, data_epoched_clean);
+    
+If you check the freq_epoched structure now, this is what will be returned.
 
-    freq_epoched =
-            label: {'EEG'}
-           dimord: 'rpt_chan_freq'
-             freq: [1x32 double]
-        powspctrm: [1154x1x32 double]
-        cumsumcnt: [1154x1 double]
-        cumtapcnt: [1154x1 double]
-              cfg: [1x1 struct]
+freq_epoched =
+      label: {'EEG'}
+     dimord: 'rpt_chan_freq'
+       freq: [1x32 double]
+  powspctrm: [1154x1x32 double]
+  cumsumcnt: [1154x1 double]
+  cumtapcnt: [1154x1 double]
+        cfg: [1x1 struct]
 
-Now comes a trick to analyze the data more efficiently: the trials/segments/epochs in the data represent time at the level of the experiment, i.e. every subsequent trial is one 30-s epoch advanced in time. We can reformat the `rpt_chan_freq` structure into a regular time-frequency representation with `chan_freq_time`. The time or latency of each trial can be constructed using the sampleinfo from the segmented data, which specified for each trial the begin and the end-sample relative in the original datafile. See also the frequently asked question ["how can I do time-frequency analysis on continuous data"](/faq/how_can_i_do_time-frequency_analysis_on_continuous_data) for more details.
+Here comes a trick to analyze the data more efficiently: the trials/segments/epochs in the data represent time at the level of the experiment, i.e. every subsequent trial is one 30-s epoch advanced in time. We can reformat the `rpt_chan_freq` structure into a regular time-frequency representation with `chan_freq_time`. The time or latency of each trial can be constructed using the sampleinfo from the segmented data, which specified for each trial the begin and the end-sample relative in the original datafile. See also the frequently asked question ["how can I do time-frequency analysis on continuous data"](/faq/how_can_i_do_time-frequency_analysis_on_continuous_data) for more details.
 
     begsample = data_epoched_clean.sampleinfo(:,1);
     endsample = data_epoched_clean.sampleinfo(:,2);
