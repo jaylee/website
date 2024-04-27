@@ -172,7 +172,7 @@ We can now look at the detected "artifacts" using **[ft_databrowser](/reference/
       cfg_art_browse             = cfg;
       cfg_art_browse.continuous  = 'yes';
       cfg_art_browse.viewmode    = 'vertical';
-      cfg_art_browse.blocksize   = 30*60; % view the data in 10-minute blocks
+      cfg_art_browse.blocksize   = 30*60; % view the data in 30-minute blocks
       ft_databrowser(cfg_art_browse, data_continuous);
 
 For the epoched data we can do a similar EMG artifact identification as abov
